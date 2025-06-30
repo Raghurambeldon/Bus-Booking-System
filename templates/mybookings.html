@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %} {# Needed for dict_get #}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/mybookings.css' %}">
+
+<h2 class="mybookings-title">My Bookings</h2>
+
+{% if mybookings %}
+<ul class="booking-list">
+  {% for booking in mybookings %}
+    <li class="booking-item">
+      <h3>Booking #{{ booking.id }}</h3>
+      <p><strong>Bus:</strong> {{ booking.bus.name }}</p>
+      <p><strong>Route:</strong> {{ booking.bus.source }} ➡ {{ booking.bus.destination }}</p>
+      <p><strong>Date:</strong> {{ booking.bus.date }}</p>
+      <p><strong>Time:</strong> {{ booking.bus.time }}</p>
+      <p><strong>Seat Number:</strong> {{ booking.seat.number }}</p>
+      <p><strong>Status:</strong>
+        <span class="status {{ booking.status|lower }}">{{ booking.status }}</span>
+      </p>
+      <p><strong>Price:</strong> ₹{{ booking.bus.price }}</p>
+
+      {% with passenger=passengers|dict_get:booking.id %}
+        {% if passenger %}
+          <hr>
+          <p><strong>Passenger Name:</strong> {{ passenger.name }}</p>
+          <p><strong>Age:</strong> {{ passenger.age }}</p>
+          <p><strong>Gender:</strong> {{ passenger.gender }}</p>
+          <p><strong>Phone:</strong> {{ passenger.phone }}</p>
+          <p><strong>Address:</strong> {{ passenger.address }}</p>
+        {% endif %}
+      {% endwith %}
+
+      {% if booking.status != 'Cancelled' %}
+        <form method="post" action="{% url 'cancel_booking' booking.id %}">
+          {% csrf_token %}
+          <button type="submit" class="cancel-btn">Cancel Booking</button>
+        </form>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p class="no-bookings">You don't have any bookings yet.</p>
+{% endif %}
+{% endblock content %}

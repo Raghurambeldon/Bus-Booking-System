@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f3f4f6;
+}
+
+.schedule-wrapper {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    animation: fadeInSlide 0.4s ease-in-out;
+}
+
+.schedule-wrapper h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #d32f2f;
+    margin-bottom: 30px;
+}
+
+/* Table Styling */
+.bus-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.bus-table th, .bus-table td {
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.bus-table th {
+    background-color: #d32f2f;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bus-table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.bus-table tr:hover {
+    background-color: #f1f5f9;
+    transition: 0.3s ease;
+}
+
+/* View Seats Button - Updated */
+.btn-view {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    display: inline-block;
+}
+
+.btn-view:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+}
+
+/* Empty message */
+.no-bus {
+    font-weight: 500;
+    color: #6b7280;
+    padding: 30px 0;
+    background-color: #fef2f2;
+    border-radius: 8px;
+}
+
+/* Animation */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bus-table {
+        font-size: 14px;
+    }
+
+    .btn-view {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .schedule-wrapper {
+        padding: 20px;
+    }
+}

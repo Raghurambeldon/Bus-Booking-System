@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to Bus Buddy🚍</h1>
+    <p>Book your journey effortlessly. Safe. Fast. Reliable.</p>
+    <a href="{% url 'buslist' %}" class="cta-btn">Search Buses</a>
+  </div>
+  <div class="hero-image">
+    <img src="{% static 'images/bus-hero.png' %}" alt="Bus Image">
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <i class="fas fa-shield-alt fa-3x" style="color:#d32f2f;"></i>
+    <h3>Safe Travel</h3>
+    <p>All our buses are GPS-enabled and well-maintained for a smooth experience.</p>
+  </div>
+  <div class="feature">
+    <i class="fas fa-headset fa-3x" style="color:#d32f2f;"></i>
+    <h3>24/7 Support</h3>
+    <p>Need help? Our team is here anytime, any day, anywhere.</p>
+  </div>
+  <div class="feature">
+    <i class="fas fa-credit-card fa-3x" style="color:#d32f2f;"></i>
+    <h3>Easy Payments</h3>
+    <p>Pay securely through UPI, cards, or wallets. Fast refunds too!</p>
+  </div>
+</section>
+
+<section class="extra-section">
+  <h2>Why Choose Us?</h2>
+  <div class="card-container">
+    <div class="card">
+      <h4>Trusted Operators</h4>
+      <p>We partner with the most trusted travel operators across the country to ensure a safe journey.</p>
+    </div>
+    <div class="card">
+      <h4>Live Tracking</h4>
+      <p>Track your bus live on the map and never miss an update about your ride.</p>
+    </div>
+    <div class="card">
+      <h4>Instant Booking</h4>
+      <p>Get instant confirmation, fast checkout, and real-time availability at your fingertips.</p>
+    </div>
+    <div class="card">
+      <h4>Exclusive Discounts</h4>
+      <p>Enjoy exclusive discounts, promo codes, and seasonal offers on every booking.</p>
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <h2>Ready to Ride?</h2>
+  <p>Explore buses to your destination and book instantly.</p>
+  <a href="{% url 'buslist' %}" class="cta-btn">Book Now</a>
+</section>
+{% endblock %}

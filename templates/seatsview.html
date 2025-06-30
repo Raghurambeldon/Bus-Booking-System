@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% load seat_filters %}  {# Load our custom seat grouping filter #}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/seatsview.css' %}">
+
+<div class="bus-layout-wrapper">
+  <h2 class="seat-title">{{ bus.name }} - Select Your Seat</h2>
+
+  <div class="bus-body">
+    <!-- Driver Seat Icon -->
+    <div class="driver-icon">🛞</div>
+
+    <!-- Seats in 2+2 format -->
+    <div class="seat-rows">
+      {% for row in seats|group_seats:4 %}
+        <div class="seat-row">
+          {# Left 2 seats #}
+          {% for seat in row|slice:":2" %}
+            {% if seat %}
+              {% if seat.is_booked %}
+                <div class="seat-box booked">{{ seat.number }}</div>
+              {% else %}
+                <a href="{% url 'passenger_details' seat.id bus.id %}">
+                  <div class="seat-box available">{{ seat.number }}</div>
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          <div class="aisle-space"></div>
+
+          {# Right 2 seats #}
+          {% for seat in row|slice:"2:" %}
+            {% if seat %}
+              {% if seat.is_booked %}
+                <div class="seat-box booked">{{ seat.number }}</div>
+              {% else %}
+                <a href="{% url 'passenger_details' seat.id bus.id %}">
+                  <div class="seat-box available">{{ seat.number }}</div>
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Seat Legend -->
+    <div class="legend">
+      <span><div class="legend-box available"></div> Available</span>
+      <span><div class="legend-box booked"></div> Booked</span>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-btn">
+      <a href="{% url 'buslist' %}" class="btn-back">⬅ Back to Buses</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

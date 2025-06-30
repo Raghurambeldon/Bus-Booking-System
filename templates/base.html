@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bus Booking</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+</head> 
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container nav-container">
+        <a href="{% url 'home' %}" class="navbar-logo">BusBuddy</a>
+        <ul class="navbar-links">
+          <li><a href="{% url 'buslist' %}">Buses</a></li>
+           <li><a href="{% url 'searchthebus' %}">Search the Bus</a></li>
+          <li><a href="{% url 'contactus' %}">Contact</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'mybookings' %}">My Bookings</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content container">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Bus Booking. All rights reserved.</p>
+      <p>Contact us at: info@busbuddy.com</p>
+    </div>
+  </footer>
+</body>
+
+</html>

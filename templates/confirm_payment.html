@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/confirm_payment.css' %}">
+
+<div class="confirm-wrapper">
+  <h2>Confirm Your Payment</h2>
+
+  <div class="confirm-seat-info">
+    <p><strong>Seat Number:</strong> {{ seat.number }}</p>
+    <p><strong>Bus Name:</strong> {{ bus.name }}</p>
+    <p><strong>Route:</strong> {{ bus.source }} ➡ {{ bus.destination }}</p>
+    <p class="confirm-price">Price: ₹{{ bus.price }}</p>
+  </div>
+
+  <form method="POST" class="confirm-form">
+    {% csrf_token %}
+    <button type="submit">Confirm & Pay</button>
+  </form>
+
+  <a href="{% url 'seatsview' bus.id %}" class="confirm-back-link">⬅ Back to Seat Selection</a>
+</div>
+{% endblock %}

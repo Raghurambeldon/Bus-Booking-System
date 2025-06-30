@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/buslist.css' %}">
+
+<div class="schedule-wrapper">
+    <h2>🚌 Bus Schedule</h2>
+
+    <table class="bus-table">
+        <thead>
+            <tr>
+                <th>Bus Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bus in buses %}
+                <tr>
+                    <td>{{ bus.name }}</td>
+                    <td>{{ bus.date }}</td>
+                    <td>{{ bus.time }}</td>
+                    <td>{{ bus.source }}</td>
+                    <td>{{ bus.destination }}</td>
+                    <td>
+                        <a href="{% url 'seatsview' bus.id %}" class="btn-view">View Seats</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="no-bus">No buses available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

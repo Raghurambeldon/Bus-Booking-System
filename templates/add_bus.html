@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/addbus.css' %}">
+
+<div class="addbus-wrapper">
+    <div class="addbus-box">
+        <h2>🚌 Add New Bus</h2>
+
+        <form method="POST" class="addbus-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_name">Bus Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_price">Ticket Price (₹)</label>
+                {{ form.price }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_source">Source</label>
+                {{ form.source }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_destination">Destination</label>
+                {{ form.destination }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_date">Travel Date</label>
+                {{ form.date }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_time">Departure Time</label>
+                {{ form.time }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_total_seats">Total Seats</label>
+                {{ form.total_seats }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">➕ Add Bus</button>
+                <a href="{% url 'home' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

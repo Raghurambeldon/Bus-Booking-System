@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/passenger_details.css' %}">
+
+<div class="form-container">
+  <h2>Enter Passenger Details for Seat {{ seat.number }} on {{ bus.name }}</h2>
+
+  {% if form %}
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Proceed to Payment</button>
+    </form>
+  {% else %}
+    <p>Form not available on this page.</p>
+  {% endif %}
+
+  <a href="{% url 'seatsview' seat.bus.id %}" class="back-link">⬅ Back to Seat Selection</a>
+</div>
+
+{% endblock %}

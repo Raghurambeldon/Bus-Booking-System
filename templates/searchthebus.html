@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/searchthebus.css' %}">
+<h2 class="search-title">Search Buses</h2>
+
+<div class="search-form">
+  <input type="text" id="origin" placeholder="Enter Origin">
+  <input type="text" id="destination" placeholder="Enter Destination">
+</div>
+
+<div id="results" class="bus-results">
+  <!-- Bus results will be inserted here -->
+</div>
+
+<script>
+  function fetchBuses() {
+    const origin = document.getElementById("origin").value;
+    const destination = document.getElementById("destination").value;
+
+    fetch(`{% url 'searchthebus' %}?origin=${origin}&destination=${destination}`, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      if (data.buses.length === 0) {
+        resultsDiv.innerHTML = "<p>No buses found.</p>";
+        return;
+      }
+
+      data.buses.forEach(bus => {
+        const div = document.createElement("div");
+        div.classList.add("bus-card");
+        div.innerHTML = `
+          <h3>${bus.name}</h3>
+          <p><strong>From:</strong> ${bus.source}</p>
+          <p><strong>To:</strong> ${bus.destination}</p>
+          <p><strong>Date:</strong> ${bus.date}</p>
+          <p><strong>Time:</strong> ${bus.time}</p>
+          <p><strong>Price:</strong> ₹${bus.price}</p>
+          <a href="/seats/${bus.id}" class="btn-view">View Seats</a>
+        `;
+        resultsDiv.appendChild(div);
+      });
+    });
+  }
+
+  document.getElementById("origin").addEventListener("input", fetchBuses);
+  document.getElementById("destination").addEventListener("input", fetchBuses);
+</script>
+{% endblock %}
