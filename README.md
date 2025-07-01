@@ -5,6 +5,6 @@ This is a Django-based bus booking system. Users can register, book tickets, and
 
 ## Features
 - User Registration/Login
-- View Available Routes
+- View Available Routes,Buses
 - Book Tickets
-- Admin Panel for Managing Routes and Bookings
+- Admin Panel for Managing Buses,Routes and Bookings
